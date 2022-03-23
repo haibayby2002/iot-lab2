@@ -64,11 +64,31 @@ namespace ThisIsMine
         public Pump_Data _pump_data;
         public Led_Data _led_data;
 
+        [SerializeField]
+        private InputField broker_inp;
+        [SerializeField]
+        private InputField user_name_inp;
+        [SerializeField]
+        private InputField password_inp;
+
 
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
+        }
+
+        public void OnClickButtonConnect()
+        {
+            brokerAddress = broker_inp.text;
+            mqttUserName = user_name_inp.text;
+            mqttPassword = password_inp.text;
+            Connect();
+        }
+
+        public void OnClickButtonDisconnect()
+        {
+            Disconnect();
         }
 
         protected override void OnConnecting()
@@ -80,6 +100,8 @@ namespace ThisIsMine
         {
             base.OnConnected();
             SubscribeTopics();
+            Debug.Log("Connected");
+            this.GetComponent<MyManager>().ShowInfoPanel();
         }
 
         protected override void SubscribeTopics()
@@ -112,6 +134,7 @@ namespace ThisIsMine
         protected override void OnDisconnected()
         {
             Debug.Log("Disconnected.");
+            this.GetComponent<MyManager>().ShowLoginPanel();
         }
 
         protected override void OnConnectionLost()

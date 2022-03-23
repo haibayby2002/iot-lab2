@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 342}
   m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
-  controlID: 68
+  controlID: 74
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 342}
   m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
-  controlID: 69
+  controlID: 104
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 70
+  controlID: 105
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 17434
+  m_LastSelectedObjectID: -17088
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -408,22 +408,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Project/icon
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script
+  - Assets/Project/icon
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\dell\Lab2_try
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 106}
-    m_SelectedIDs: 24450000
-    m_LastClickedID: 17700
-    m_ExpandedIDs: 00000000f0440000f2440000f4440000f6440000f8440000fa440000fc440000fe4400000045000002450000044500000645000000ca9a3b
+    scrollPos: {x: 0, y: 30}
+    m_SelectedIDs: ba4b0000
+    m_LastClickedID: 19386
+    m_ExpandedIDs: 00000000f0440000f2440000f4440000f6440000f8440000fa440000fc440000fe4400000045000004450000064500009851000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -476,8 +476,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7c440000
-    m_LastClickedInstanceID: 17532
+    m_SelectedInstanceIDs: 40bdffff
+    m_LastClickedInstanceID: -17088
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000566500004244000030430000f2420000a8560000945600004e430000d45a00004270000000000000
     m_RenameOverlay:
@@ -539,7 +539,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 99.19995
   m_GlobalObjectId: 
   m_LockTracker:
     m_IsLocked: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 64fbffffb8430000ec430000f6430000
+      m_ExpandedIDs: 40bdffff64fbffffa4430000b8430000c8430000ec430000f643000072440000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -634,9 +634,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 260.63773, y: 366.27124, z: -731.63574}
+    m_Target: {x: 311.7455, y: 400.60056, z: -801.2841}
     speed: 2
-    m_Value: {x: 260.63773, y: 366.27124, z: -731.63574}
+    m_Value: {x: 311.7455, y: 400.60056, z: -801.2841}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -687,9 +687,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 283.94965
+    m_Target: 228.98048
     speed: 2
-    m_Value: 283.94965
+    m_Value: 228.98048
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -783,18 +783,18 @@ MonoBehaviour:
       y: 21
       width: 786
       height: 418
-    m_Scale: {x: 1.1867093, y: 1.1867093}
-    m_Translation: {x: 393, y: 208.99998}
+    m_Scale: {x: 0.9148424, y: 0.9148424}
+    m_Translation: {x: 393, y: 209.00002}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -331.16788
-      y: -176.11726
-      width: 662.33575
-      height: 352.23453
+      x: -429.58218
+      y: -228.45467
+      width: 859.16437
+      height: 456.90927
     m_MinimalGUI: 1
   m_defaultScale: 0.7833583
   m_LastWindowPixelSize: {x: 982.5, y: 548.75}

@@ -31,6 +31,9 @@ namespace ThisIsMine
         private Toggle toggleLed;
         [SerializeField]
         private Toggle togglePump;
+
+        private Tween twenFade;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -41,6 +44,18 @@ namespace ThisIsMine
         void Update()
         {
 
+        }
+
+        public void ShowInfoPanel()
+        {
+            Debug.Log("Come into show info");
+            StartCoroutine(_IESwitchLayer());
+        }
+
+        public void ShowLoginPanel()
+        {
+            Debug.Log("Come into show info");
+            StartCoroutine(_IESwitchLayer());
         }
 
         public void Update_Status(Status_Data _status_data)
@@ -74,7 +89,57 @@ namespace ThisIsMine
                 togglePump.interactable = true;
             }
         }
-    
+
+        public void Fade(CanvasGroup _canvas, float endValue, float duration, TweenCallback onFinish)
+        {
+            if (twenFade != null)
+            {
+                twenFade.Kill(false);
+            }
+
+            twenFade = _canvas.DOFade(endValue, duration);
+            twenFade.onComplete += onFinish;
+        }
+        public void FadeIn(CanvasGroup _canvas, float duration)
+        {
+            Fade(_canvas, 1f, duration, () =>
+            {
+                _canvas.interactable = true;
+                _canvas.blocksRaycasts = true;
+            });
+        }
+
+        public void FadeOut(CanvasGroup _canvas, float duration)
+        {
+            Fade(_canvas, 0f, duration, () =>
+            {
+                _canvas.interactable = false;
+                _canvas.blocksRaycasts = false;
+            });
+        }
+
+
+        
+        IEnumerator _IESwitchLayer()
+        {
+            if (panelLogin.interactable == true)
+            {
+                FadeOut(panelLogin, 0.25f);
+                panelLogin.blocksRaycasts = false;
+                yield return new WaitForSeconds(0.5f);
+                FadeIn(panelInfo, 0.25f);
+                panelInfo.blocksRaycasts = true;
+            }
+            else
+            {
+                FadeOut(panelInfo, 0.25f);
+                panelInfo.blocksRaycasts = false;
+                yield return new WaitForSeconds(0.5f);
+                FadeIn(panelLogin, 0.25f);
+                panelLogin.blocksRaycasts = true;
+            }
+        }
+        
 
     }
 }
