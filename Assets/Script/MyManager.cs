@@ -47,13 +47,35 @@ namespace ThisIsMine
         {
             txtTemperature.text = _status_data.temperature.ToString() + " °C";
             txtHumidity.text = _status_data.humidity.ToString() + " %";
-            toggleLed.isOn = _status_data.led_on == "ON";
-            togglePump.isOn = _status_data.pump_on == "ON";
-            //Debug.Log(_status_data.temperature.ToString() + " °C");
-            //Debug.Log(_status_data.humidity.ToString() + " %");
         }
 
-        
+        public void Update_Led(Led_Data _led_data)
+        {
+            if(toggleLed.isOn != (_led_data.status == "ON"))
+            {
+                toggleLed.isOn = !toggleLed.isOn;
+                toggleLed.interactable = false;
+            }
+            else
+            {
+                toggleLed.interactable = true;
+            }
+        }
+
+        public void Update_Pump(Pump_Data _pump_data)
+        {
+            if (togglePump.isOn != (_pump_data.status == "ON"))
+            {
+                togglePump.isOn = !togglePump.isOn;
+                togglePump.interactable = false;
+            }
+            else
+            {
+                togglePump.interactable = true;
+            }
+        }
+    
+
     }
 }
 

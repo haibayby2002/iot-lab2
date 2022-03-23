@@ -25,9 +25,21 @@ namespace ThisIsMine
 
         public int temperature { get; set; }
         public int humidity { get; set; }
-        public string led_on { get; set; }     //0: off; 1: on
-        public string pump_on { get; set; }    //0: off; 1: on
+        //public string led_on { get; set; }     //0: off; 1: on
+        //public string pump_on { get; set; }    //0: off; 1: on
 
+    }
+
+    public class Led_Data
+    {
+        public string device { get; set; }
+        public string status { get; set; }     //"ON", "OFF"
+    }
+
+    public class Pump_Data
+    {
+        public string device { get; set; }
+        public string status { get; set; }     // "ON", "OFF"
     }
 
     public class Config_Data
@@ -49,6 +61,8 @@ namespace ThisIsMine
         private List<string> eventMessages = new List<string>();
         [SerializeField]
         public Status_Data _status_data;
+        public Pump_Data _pump_data;
+        public Led_Data _led_data;
 
 
         // Start is called before the first frame update
@@ -113,10 +127,18 @@ namespace ThisIsMine
 
             if (topic == topics[0])
                 ProcessMessageStatus(msg);
-            /*
+
+
+            
+            if (topic == topics[1])
+                ProcessLedControl(msg);
+
+            
+            
             if (topic == topics[2])
-                ProcessMessageControl(msg);
-            */
+                ProcessPumpControl(msg);
+            
+
         }
 
         private void ProcessMessageStatus(string msg)
@@ -124,8 +146,49 @@ namespace ThisIsMine
             _status_data = JsonConvert.DeserializeObject<Status_Data>(msg);
             msg_received_from_topic_status = msg;
             GetComponent<MyManager>().Update_Status(_status_data);
-
         }
+
+        private void ProcessLedControl(string msg)
+        {
+            _led_data = JsonConvert.DeserializeObject<Led_Data>(msg);
+            msg_received_from_topic_status = msg;
+            GetComponent<MyManager>().Update_Led(_led_data);
+        }
+        
+        private void ProcessPumpControl(string msg) //Recive (Subcribe)
+        {
+            _pump_data = JsonConvert.DeserializeObject<Pump_Data>(msg);
+            msg_received_from_topic_status = msg;
+            GetComponent<MyManager>().Update_Pump(_pump_data);
+        }
+
+        public void PublishLed()        //Send
+        {
+            ledToggle.interactable = false;
+
+            //Send data
+            string data = "{\"device\":\"LED\"," + (ledToggle.isOn ? "\"status\": \"ON\"}" : "\"status\": \"OFF\"}");
+            client.Publish(topics[1], System.Text.Encoding.UTF8.GetBytes(data), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            Debug.Log("Have published" + data);
+        }
+
+        public void PublishPump()        //Send
+        {
+            pumpToggle.interactable = false;
+
+            //Send data
+            string data = "{\"device\":\"PUMP\"," + (pumpToggle.isOn ? "\"status\": \"ON\"}" : "\"status\": \"OFF\"}");
+            client.Publish(topics[2], System.Text.Encoding.UTF8.GetBytes(data), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            Debug.Log("Have published" + data);
+        }
+        /*
+        private void ProcessPumpStatus(string msg)
+        {
+            _pump_data = JsonConvert.DeserializeObject<Pump_Data>(msg);
+            msg_received_from_topic_status = msg;
+            GetComponent<MyManager>().Update_Pump(_pump_data);
+        }
+        */
 
         private void ProcessMessageControl(string msg)
         {
@@ -134,16 +197,15 @@ namespace ThisIsMine
             //GetComponent<ChuongGaManager>().Update_Control(_controlFan_data);
 
         }
+        // Publish state of led
 
-        public void LedChange()
+        //Publish state of pump
+        public void Update_Pump(Pump_Data pump_Data)
         {
-            string data = "{\"device\":\"LED\"," + (ledToggle.isOn ? "\"status\": \"ON\"}" : "\"status\": \"OFF\"}");
-            client.Publish(topics[1], System.Text.Encoding.UTF8.GetBytes(data), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-            Debug.Log("Have published " + data);
-        }
+            //Not allowed user to update the data until get the respnose from server
+            pumpToggle.interactable = false;
 
-        public void PumpChange()
-        {
+            //Send data
             string data = "{\"device\":\"PUMP\"," + (pumpToggle.isOn ? "\"status\": \"ON\"}" : "\"status\": \"OFF\"}");
             client.Publish(topics[2], System.Text.Encoding.UTF8.GetBytes(data), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             Debug.Log("Have published" + data);
